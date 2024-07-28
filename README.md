@@ -47,11 +47,6 @@ Use the shortcode `[demo_popup id="123"]` in your posts, pages, or widgets, wher
 
 You can choose a button style and set custom colors for the buttons from the plugin's settings page in the WordPress admin.
 
-## Screenshots
-
-1. Screenshot of the settings page.
-2. Screenshot of a sample popup.
-
 ## Changelog
 
 ### 1.0
@@ -61,18 +56,6 @@ You can choose a button style and set custom colors for the buttons from the plu
 ## License
 
 This plugin is licensed under the GPLv2 or later. For more information, see [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/licenses/gpl-2.0.html).
-
-## Contributing
-
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/fooBar`).
-3. Commit your changes (`git commit -am 'Add some fooBar'`).
-4. Push to the branch (`git push origin feature/fooBar`).
-5. Create a new Pull Request.
-
-## Donate
-
-[Donate link](https://t.me/dimsseo)
 
 ## Contact
 
