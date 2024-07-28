@@ -26,7 +26,7 @@ function dpp_register_custom_post_type() {
         'public' => false,
         'show_ui' => true,
         'supports' => array('title'),
-        'menu_icon' => 'dashicons-editor-expand', // Используем иконку dashicons-editor-expand
+        'menu_icon' => 'dashicons-editor-expand',
     ));
 }
 add_action('init', 'dpp_register_custom_post_type');
@@ -41,6 +41,8 @@ function dpp_modal_meta_callback($post) {
     $demo_link = get_post_meta($post->ID, '_dpp_demo_link', true);
     $casino_link = get_post_meta($post->ID, '_dpp_casino_link', true);
     $button_style = get_post_meta($post->ID, '_dpp_button_style', true);
+    $play_button_text = get_post_meta($post->ID, '_dpp_play_button_text', 'Demo button');
+    $link_button_text = get_post_meta($post->ID, '_dpp_link_button_text', 'Link button');
 
     ?>
     <p>
@@ -48,7 +50,7 @@ function dpp_modal_meta_callback($post) {
         <input type="text" name="dpp_demo_link" id="dpp_demo_link" value="<?php echo esc_attr($demo_link); ?>" size="50">
     </p>
     <p>
-        <label for="dpp_casino_link"><?php _e('Casino Link', 'dpp'); ?></label><br>
+        <label for="dpp_casino_link"><?php _e('Affiliate Link', 'dpp'); ?></label><br>
         <input type="text" name="dpp_casino_link" id="dpp_casino_link" value="<?php echo esc_attr($casino_link); ?>" size="50">
     </p>
     <p>
@@ -57,6 +59,14 @@ function dpp_modal_meta_callback($post) {
             <option value="style1" <?php selected($button_style, 'style1'); ?>>Style 1</option>
             <!-- Add more styles here in the future -->
         </select>
+    </p>
+    <p>
+        <label for="dpp_play_button_text"><?php _e('Play Button Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_play_button_text" id="dpp_play_button_text" value="<?php echo esc_attr($play_button_text); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_link_button_text"><?php _e('Link Button Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_link_button_text" id="dpp_link_button_text" value="<?php echo esc_attr($link_button_text); ?>" size="50">
     </p>
     <?php
 }
@@ -71,6 +81,12 @@ function dpp_save_meta_box_data($post_id) {
     }
     if (array_key_exists('dpp_button_style', $_POST)) {
         update_post_meta($post_id, '_dpp_button_style', sanitize_text_field($_POST['dpp_button_style']));
+    }
+    if (array_key_exists('dpp_play_button_text', $_POST)) {
+        update_post_meta($post_id, '_dpp_play_button_text', sanitize_text_field($_POST['dpp_play_button_text']));
+    }
+    if (array_key_exists('dpp_link_button_text', $_POST)) {
+        update_post_meta($post_id, '_dpp_link_button_text', sanitize_text_field($_POST['dpp_link_button_text']));
     }
 }
 add_action('save_post', 'dpp_save_meta_box_data');
@@ -132,6 +148,8 @@ function dpp_modal_shortcode($atts) {
     $demo_link = get_post_meta($post_id, '_dpp_demo_link', true);
     $casino_link = get_post_meta($post_id, '_dpp_casino_link', true);
     $button_style = get_post_meta($post_id, '_dpp_button_style', 'style1');
+    $play_button_text = get_post_meta($post_id, '_dpp_play_button_text', 'Demo button');
+    $link_button_text = get_post_meta($post_id, '_dpp_link_button_text', 'Link button');
 
     $reload_icon = get_option('dpp_reload_icon') ? get_option('dpp_reload_icon') : plugins_url('img/reload.png', __FILE__);
     $close_icon = get_option('dpp_close_icon') ? get_option('dpp_close_icon') : plugins_url('img/close.png', __FILE__);
@@ -139,11 +157,11 @@ function dpp_modal_shortcode($atts) {
     ob_start();
     ?>
     <div class="popup-demo" data-popup-id="<?php echo esc_attr($post_id); ?>">
-        <div class="overlay <?php echo esc_attr($button_style); ?>">
+        <div class="<?php echo esc_attr($button_style); ?>">
             <?php if ($atts['show-link'] === 'yes') : ?>
-                <button class="link-button" data-casino-link="<?php echo esc_url($casino_link); ?>">Jogar no Cassino</button>
+                <button class="link-button" data-casino-link="<?php echo esc_url($casino_link); ?>"><?php echo esc_html($link_button_text); ?></button>
             <?php endif; ?>
-            <button class="play-button" data-demo-link="<?php echo esc_url($demo_link); ?>">Jogar Demo Grátis</button>
+            <button class="play-button" data-demo-link="<?php echo esc_url($demo_link); ?>"><?php echo esc_html($play_button_text); ?></button>
         </div>
     </div>
     <div id="popup-<?php echo esc_attr($post_id); ?>" class="popup" style="display:none;">
