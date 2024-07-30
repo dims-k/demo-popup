@@ -43,6 +43,7 @@ function dpp_modal_meta_callback($post) {
     $button_style = get_post_meta($post->ID, '_dpp_button_style', true);
     $play_button_text = get_post_meta($post->ID, '_dpp_play_button_text', 'Demo button');
     $link_button_text = get_post_meta($post->ID, '_dpp_link_button_text', 'Link button');
+    $show_link_button = get_post_meta($post->ID, '_dpp_show_link_button', true);
     $overlay_enabled = get_post_meta($post->ID, '_dpp_overlay_enabled', true);
     $overlay_button_text = get_post_meta($post->ID, '_dpp_overlay_button_text', 'Play');
     $overlay_button_color = get_post_meta($post->ID, '_dpp_overlay_button_color', '#007bff');
@@ -80,6 +81,10 @@ function dpp_modal_meta_callback($post) {
     <p>
         <label for="dpp_link_button_text"><?php _e('Link Button Text', 'dpp'); ?></label><br>
         <input type="text" name="dpp_link_button_text" id="dpp_link_button_text" value="<?php echo esc_attr($link_button_text); ?>" size="50">
+    </p>
+    <p>
+        <input type="checkbox" name="dpp_show_link_button" id="dpp_show_link_button" value="1" <?php checked($show_link_button, '1'); ?>>
+        <label for="dpp_show_link_button"><?php _e('Show Link Button', 'dpp'); ?></label>
     </p>
     <h4><?php _e('Overlay Button Settings', 'dpp'); ?></h4>
     <p>
@@ -154,6 +159,11 @@ function dpp_save_meta_box_data($post_id) {
     }
     if (array_key_exists('dpp_link_button_text', $_POST)) {
         update_post_meta($post_id, '_dpp_link_button_text', sanitize_text_field($_POST['dpp_link_button_text']));
+    }
+    if (array_key_exists('dpp_show_link_button', $_POST)) {
+        update_post_meta($post_id, '_dpp_show_link_button', sanitize_text_field($_POST['dpp_show_link_button']));
+    } else {
+        update_post_meta($post_id, '_dpp_show_link_button', '0');
     }
     if (array_key_exists('dpp_overlay_enabled', $_POST)) {
         update_post_meta($post_id, '_dpp_overlay_enabled', sanitize_text_field($_POST['dpp_overlay_enabled']));
@@ -258,6 +268,7 @@ function dpp_modal_shortcode($atts) {
     $button_style = get_post_meta($post_id, '_dpp_button_style', 'style1');
     $play_button_text = get_post_meta($post_id, '_dpp_play_button_text', 'Demo button');
     $link_button_text = get_post_meta($post_id, '_dpp_link_button_text', 'Link button');
+    $show_link_button = get_post_meta($post_id, '_dpp_show_link_button', '1');
     $overlay_enabled = get_post_meta($post_id, '_dpp_overlay_enabled', true);
     $overlay_time = get_post_meta($post_id, '_dpp_overlay_time', 30);
     $overlay_button_text = get_post_meta($post_id, '_dpp_overlay_button_text', 'Play');
@@ -292,7 +303,7 @@ function dpp_modal_shortcode($atts) {
          data-overlay-continue-button-hover-color="<?php echo esc_attr($overlay_continue_button_hover_color); ?>"
          data-overlay-continue-button-hover-text-color="<?php echo esc_attr($overlay_continue_button_hover_text_color); ?>">
         <div class="<?php echo esc_attr($button_style); ?>">
-            <?php if ($atts['show-link'] === 'yes') : ?>
+            <?php if ($show_link_button === '1') : ?>
                 <button class="link-button" data-casino-link="<?php echo esc_url($casino_link); ?>"><?php echo esc_html($link_button_text); ?></button>
             <?php endif; ?>
             <button class="play-button" data-demo-link="<?php echo esc_url($demo_link); ?>"><?php echo esc_html($play_button_text); ?></button>
