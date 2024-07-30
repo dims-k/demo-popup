@@ -43,6 +43,19 @@ function dpp_modal_meta_callback($post) {
     $button_style = get_post_meta($post->ID, '_dpp_button_style', true);
     $play_button_text = get_post_meta($post->ID, '_dpp_play_button_text', 'Demo button');
     $link_button_text = get_post_meta($post->ID, '_dpp_link_button_text', 'Link button');
+    $overlay_enabled = get_post_meta($post->ID, '_dpp_overlay_enabled', true);
+    $overlay_button_text = get_post_meta($post->ID, '_dpp_overlay_button_text', 'Play');
+    $overlay_button_color = get_post_meta($post->ID, '_dpp_overlay_button_color', '#007bff');
+    $overlay_button_text_color = get_post_meta($post->ID, '_dpp_overlay_button_text_color', '#FFFFFF');
+    $overlay_button_hover_color = get_post_meta($post->ID, '_dpp_overlay_button_hover_color', '#0056b3');
+    $overlay_button_hover_text_color = get_post_meta($post->ID, '_dpp_overlay_button_hover_text_color', '#FFFFFF');
+    $overlay_button_link = get_post_meta($post->ID, '_dpp_overlay_button_link', true);
+    $overlay_continue_button_text = get_post_meta($post->ID, '_dpp_overlay_continue_button_text', 'Continue play');
+    $overlay_continue_button_color = get_post_meta($post->ID, '_dpp_overlay_continue_button_color', '#28a745');
+    $overlay_continue_button_text_color = get_post_meta($post->ID, '_dpp_overlay_continue_button_text_color', '#FFFFFF');
+    $overlay_continue_button_hover_color = get_post_meta($post->ID, '_dpp_overlay_continue_button_hover_color', '#218838');
+    $overlay_continue_button_hover_text_color = get_post_meta($post->ID, '_dpp_overlay_continue_button_hover_text_color', '#FFFFFF');
+    $overlay_time = get_post_meta($post->ID, '_dpp_overlay_time', 30);
 
     ?>
     <p>
@@ -68,6 +81,60 @@ function dpp_modal_meta_callback($post) {
         <label for="dpp_link_button_text"><?php _e('Link Button Text', 'dpp'); ?></label><br>
         <input type="text" name="dpp_link_button_text" id="dpp_link_button_text" value="<?php echo esc_attr($link_button_text); ?>" size="50">
     </p>
+    <h4><?php _e('Overlay Button Settings', 'dpp'); ?></h4>
+    <p>
+        <input type="checkbox" name="dpp_overlay_enabled" id="dpp_overlay_enabled" value="1" <?php checked($overlay_enabled, '1'); ?>>
+        <label for="dpp_overlay_enabled"><?php _e('Enable Overlay', 'dpp'); ?></label>
+    </p>
+    <p>
+        <label for="dpp_overlay_time"><?php _e('Overlay Time (seconds)', 'dpp'); ?></label><br>
+        <input type="number" name="dpp_overlay_time" id="dpp_overlay_time" value="<?php echo esc_attr($overlay_time); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_overlay_button_text"><?php _e('Overlay Button Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_button_text" id="dpp_overlay_button_text" value="<?php echo esc_attr($overlay_button_text); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_overlay_button_color"><?php _e('Overlay Button Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_button_color" id="dpp_overlay_button_color" value="<?php echo esc_attr($overlay_button_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_overlay_button_text_color"><?php _e('Overlay Button Text Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_button_text_color" id="dpp_overlay_button_text_color" value="<?php echo esc_attr($overlay_button_text_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_overlay_button_hover_color"><?php _e('Overlay Button Hover Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_button_hover_color" id="dpp_overlay_button_hover_color" value="<?php echo esc_attr($overlay_button_hover_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_overlay_button_hover_text_color"><?php _e('Overlay Button Hover Text Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_button_hover_text_color" id="dpp_overlay_button_hover_text_color" value="<?php echo esc_attr($overlay_button_hover_text_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_overlay_button_link"><?php _e('Overlay Button Link', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_button_link" id="dpp_overlay_button_link" value="<?php echo esc_attr($overlay_button_link); ?>" size="50">
+    </p>
+    <h4><?php _e('Overlay Continue Button Settings', 'dpp'); ?></h4>
+    <p>
+        <label for="dpp_overlay_continue_button_text"><?php _e('Overlay Continue Button Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_continue_button_text" id="dpp_overlay_continue_button_text" value="<?php echo esc_attr($overlay_continue_button_text); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_overlay_continue_button_color"><?php _e('Overlay Continue Button Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_continue_button_color" id="dpp_overlay_continue_button_color" value="<?php echo esc_attr($overlay_continue_button_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_overlay_continue_button_text_color"><?php _e('Overlay Continue Button Text Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_continue_button_text_color" id="dpp_overlay_continue_button_text_color" value="<?php echo esc_attr($overlay_continue_button_text_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_overlay_continue_button_hover_color"><?php _e('Overlay Continue Button Hover Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_continue_button_hover_color" id="dpp_overlay_continue_button_hover_color" value="<?php echo esc_attr($overlay_continue_button_hover_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_overlay_continue_button_hover_text_color"><?php _e('Overlay Continue Button Hover Text Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_overlay_continue_button_hover_text_color" id="dpp_overlay_continue_button_hover_text_color" value="<?php echo esc_attr($overlay_continue_button_hover_text_color); ?>" size="7" class="color-field">
+    </p>
     <?php
 }
 
@@ -87,6 +154,47 @@ function dpp_save_meta_box_data($post_id) {
     }
     if (array_key_exists('dpp_link_button_text', $_POST)) {
         update_post_meta($post_id, '_dpp_link_button_text', sanitize_text_field($_POST['dpp_link_button_text']));
+    }
+    if (array_key_exists('dpp_overlay_enabled', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_enabled', sanitize_text_field($_POST['dpp_overlay_enabled']));
+    } else {
+        update_post_meta($post_id, '_dpp_overlay_enabled', '0');
+    }
+    if (array_key_exists('dpp_overlay_time', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_time', intval($_POST['dpp_overlay_time']));
+    }
+    if (array_key_exists('dpp_overlay_button_text', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_button_text', sanitize_text_field($_POST['dpp_overlay_button_text']));
+    }
+    if (array_key_exists('dpp_overlay_button_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_button_color', sanitize_text_field($_POST['dpp_overlay_button_color']));
+    }
+    if (array_key_exists('dpp_overlay_button_text_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_button_text_color', sanitize_text_field($_POST['dpp_overlay_button_text_color']));
+    }
+    if (array_key_exists('dpp_overlay_button_hover_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_button_hover_color', sanitize_text_field($_POST['dpp_overlay_button_hover_color']));
+    }
+    if (array_key_exists('dpp_overlay_button_hover_text_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_button_hover_text_color', sanitize_text_field($_POST['dpp_overlay_button_hover_text_color']));
+    }
+    if (array_key_exists('dpp_overlay_button_link', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_button_link', esc_url_raw($_POST['dpp_overlay_button_link']));
+    }
+    if (array_key_exists('dpp_overlay_continue_button_text', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_continue_button_text', sanitize_text_field($_POST['dpp_overlay_continue_button_text']));
+    }
+    if (array_key_exists('dpp_overlay_continue_button_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_continue_button_color', sanitize_text_field($_POST['dpp_overlay_continue_button_color']));
+    }
+    if (array_key_exists('dpp_overlay_continue_button_text_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_continue_button_text_color', sanitize_text_field($_POST['dpp_overlay_continue_button_text_color']));
+    }
+    if (array_key_exists('dpp_overlay_continue_button_hover_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_continue_button_hover_color', sanitize_text_field($_POST['dpp_overlay_continue_button_hover_color']));
+    }
+    if (array_key_exists('dpp_overlay_continue_button_hover_text_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_overlay_continue_button_hover_text_color', sanitize_text_field($_POST['dpp_overlay_continue_button_hover_text_color']));
     }
 }
 add_action('save_post', 'dpp_save_meta_box_data');
@@ -150,13 +258,39 @@ function dpp_modal_shortcode($atts) {
     $button_style = get_post_meta($post_id, '_dpp_button_style', 'style1');
     $play_button_text = get_post_meta($post_id, '_dpp_play_button_text', 'Demo button');
     $link_button_text = get_post_meta($post_id, '_dpp_link_button_text', 'Link button');
+    $overlay_enabled = get_post_meta($post_id, '_dpp_overlay_enabled', true);
+    $overlay_time = get_post_meta($post_id, '_dpp_overlay_time', 30);
+    $overlay_button_text = get_post_meta($post_id, '_dpp_overlay_button_text', 'Play');
+    $overlay_button_color = get_post_meta($post_id, '_dpp_overlay_button_color', '#007bff');
+    $overlay_button_text_color = get_post_meta($post_id, '_dpp_overlay_button_text_color', '#FFFFFF');
+    $overlay_button_hover_color = get_post_meta($post_id, '_dpp_overlay_button_hover_color', '#0056b3');
+    $overlay_button_hover_text_color = get_post_meta($post_id, '_dpp_overlay_button_hover_text_color', '#FFFFFF');
+    $overlay_button_link = get_post_meta($post_id, '_dpp_overlay_button_link', true);
+    $overlay_continue_button_text = get_post_meta($post_id, '_dpp_overlay_continue_button_text', 'Continue play');
+    $overlay_continue_button_color = get_post_meta($post_id, '_dpp_overlay_continue_button_color', '#28a745');
+    $overlay_continue_button_text_color = get_post_meta($post_id, '_dpp_overlay_continue_button_text_color', '#FFFFFF');
+    $overlay_continue_button_hover_color = get_post_meta($post_id, '_dpp_overlay_continue_button_hover_color', '#218838');
+    $overlay_continue_button_hover_text_color = get_post_meta($post_id, '_dpp_overlay_continue_button_hover_text_color', '#FFFFFF');
 
     $reload_icon = get_option('dpp_reload_icon') ? get_option('dpp_reload_icon') : plugins_url('img/reload.png', __FILE__);
     $close_icon = get_option('dpp_close_icon') ? get_option('dpp_close_icon') : plugins_url('img/close.png', __FILE__);
 
     ob_start();
     ?>
-    <div class="popup-demo" data-popup-id="<?php echo esc_attr($post_id); ?>">
+    <div class="popup-demo" data-popup-id="<?php echo esc_attr($post_id); ?>"
+         data-overlay-enabled="<?php echo esc_attr($overlay_enabled); ?>"
+         data-overlay-time="<?php echo esc_attr($overlay_time); ?>"
+         data-overlay-button-text="<?php echo esc_attr($overlay_button_text); ?>"
+         data-overlay-button-color="<?php echo esc_attr($overlay_button_color); ?>"
+         data-overlay-button-text-color="<?php echo esc_attr($overlay_button_text_color); ?>"
+         data-overlay-button-hover-color="<?php echo esc_attr($overlay_button_hover_color); ?>"
+         data-overlay-button-hover-text-color="<?php echo esc_attr($overlay_button_hover_text_color); ?>"
+         data-overlay-button-link="<?php echo esc_attr($overlay_button_link); ?>"
+         data-overlay-continue-button-text="<?php echo esc_attr($overlay_continue_button_text); ?>"
+         data-overlay-continue-button-color="<?php echo esc_attr($overlay_continue_button_color); ?>"
+         data-overlay-continue-button-text-color="<?php echo esc_attr($overlay_continue_button_text_color); ?>"
+         data-overlay-continue-button-hover-color="<?php echo esc_attr($overlay_continue_button_hover_color); ?>"
+         data-overlay-continue-button-hover-text-color="<?php echo esc_attr($overlay_continue_button_hover_text_color); ?>">
         <div class="<?php echo esc_attr($button_style); ?>">
             <?php if ($atts['show-link'] === 'yes') : ?>
                 <button class="link-button" data-casino-link="<?php echo esc_url($casino_link); ?>"><?php echo esc_html($link_button_text); ?></button>

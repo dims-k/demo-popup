@@ -73,7 +73,7 @@
     text-align: center;
 }
 
-.link-button, .play-button {
+.link-button, .play-button, #game-overlay button {
     font-family: 'Roboto', sans-serif;
     padding: 15px 30px;
     font-size: 25px;
@@ -89,14 +89,14 @@
     outline: none;
     animation: blink-animation 2s infinite;
     display: inline-block;
-    margin: 5px; /* Расстояние между кнопками */
+    margin: 5px; /* Space between buttons */
 }
 
 .link-button {
     background: var(--dpp-link-button-color);
 }
 
-.play-button:hover {
+.play-button:hover, #game-overlay button:hover {
     background: var(--dpp-modal-button-hover-color);
 }
 
@@ -104,7 +104,7 @@
     background: var(--dpp-link-button-hover-color);
 }
 
-.play-button:active, .link-button:active {
+.play-button:active, .link-button:active, #game-overlay button:active {
     box-shadow: inset 0 0 10px #000;
 }
 
@@ -117,3 +117,41 @@
     }
 }
 /* Button styles END */
+
+/* Overlay styles */
+#game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1001;
+}
+
+#game-overlay button {
+    font-family: 'Roboto', sans-serif;
+    padding: 15px 30px;
+    font-size: 25px;
+    font-weight: 700;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    outline: none;
+    margin: 10px 0;
+}
+
+#game-overlay button:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#game-overlay button:active {
+    box-shadow: inset 0 0 10px #000;
+}
