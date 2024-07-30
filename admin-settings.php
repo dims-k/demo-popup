@@ -158,7 +158,7 @@ function dpp_modal_button_hover_color_render() {
 function dpp_options_page() {
     ?>
     <form action="options.php" method="post">
-        <h2>Demo Popup Plugin</h2>
+        <h2>Demo Popup Plugin1</h2>
         <?php
         settings_fields('pluginPage');
         do_settings_sections('pluginPage');
