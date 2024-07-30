@@ -171,4 +171,23 @@ document.addEventListener('DOMContentLoaded', function() {
     root.style.setProperty('--dpp-modal-button-color', dpp_settings.modal_button_color);
     root.style.setProperty('--dpp-modal-button-text-color', dpp_settings.modal_button_text_color);
     root.style.setProperty('--dpp-modal-button-hover-color', dpp_settings.modal_button_hover_color);
+
+    // Function to remove beforeunload and unload event listeners
+    const removeEventListeners = (event) => {
+        const newEvent = new Event(event);
+        window.dispatchEvent(newEvent);
+    };
+
+    // Trigger and remove existing beforeunload and unload event listeners
+    removeEventListeners('beforeunload');
+    removeEventListeners('unload');
+
+    // Override beforeunload and unload events
+    window.addEventListener('beforeunload', function(event) {
+        event.stopImmediatePropagation();
+    });
+
+    window.addEventListener('unload', function(event) {
+        event.stopImmediatePropagation();
+    });
 });
