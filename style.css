@@ -76,8 +76,8 @@
 .link-button, .play-button {
     z-index: 1002;
     font-family: 'Roboto', sans-serif;
-    padding: 15px 30px;
-    font-size: 25px;
+    padding: 10px 15px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--dpp-modal-button-text-color);
     background: var(--dpp-modal-button-color);
@@ -91,6 +91,9 @@
     animation: blink-animation 2s infinite;
     display: inline-block;
     margin: 5px; /* Space between buttons */
+    min-width: 200px; /* Minimum width for buttons */
+    width: 100%; /* Make buttons occupy the same width */
+    max-width: 250px; /* Maximum width for buttons */
 }
 
 .link-button {
@@ -113,8 +116,8 @@
 #game-overlay .overlay-play-button, #game-overlay .overlay-continue-button {
     z-index: 1002;
     font-family: 'Roboto', sans-serif;
-    padding: 15px 30px; /* Make it the same size as the play button */
-    font-size: 25px;
+    padding: 10px 15px; /* Make it the same size as the play button */
+    font-size: 22px;
     font-weight: 700;
     color: var(--dpp-modal-button-text-color);
     background: var(--dpp-modal-button-color);
@@ -126,6 +129,9 @@
     text-align: center;
     outline: none;
     margin: 10px 0;
+    min-width: 200px; /* Minimum width for buttons */
+    width: 100%; /* Make buttons occupy the same width */
+    max-width: 250px; /* Maximum width for buttons */
 }
 
 #game-overlay .overlay-play-button:hover {
@@ -159,7 +165,7 @@
     height: 100%;
     max-width: 100%;
     max-height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
