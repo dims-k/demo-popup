@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const root = document.documentElement;
+    root.style.setProperty('--dpp-link-button-color', dpp_settings.link_button_color);
+    root.style.setProperty('--dpp-link-button-text-color', dpp_settings.link_button_text_color);
+    root.style.setProperty('--dpp-link-button-hover-color', dpp_settings.link_button_hover_color);
+    root.style.setProperty('--dpp-modal-button-color', dpp_settings.modal_button_color);
+    root.style.setProperty('--dpp-modal-button-text-color', dpp_settings.modal_button_text_color);
+    root.style.setProperty('--dpp-modal-button-hover-color', dpp_settings.modal_button_hover_color);
+    console.log('CSS Variables set:', getComputedStyle(root).getPropertyValue('--dpp-modal-button-hover-color'));
+
     document.querySelectorAll('.play-button').forEach(button => {
         button.addEventListener('click', function() {
             console.log('Play button clicked');
@@ -67,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 overlay.id = 'game-overlay';
                 overlay.style.display = 'flex';
                 overlay.innerHTML = `
-                    <button id="overlay-button" 
+                    <button id="overlay-button" class="overlay-play-button"
                             style="color: ${overlayButtonTextColor}; background: ${overlayButtonColor};">
                             ${overlayButtonText}
                     </button>
-                    <button id="overlay-continue-button" 
+                    <button id="overlay-continue-button" class="overlay-continue-button"
                             style="color: ${overlayContinueButtonTextColor}; background: ${overlayContinueButtonColor};">
                             ${overlayContinueButtonText}
                     </button>`;
@@ -84,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     overlay.style.display = 'none';
                     console.log('Overlay button clicked');
                     if (overlayButtonLink) {
-                        window.location.href = overlayButtonLink;
+                        window.open(overlayButtonLink, '_blank'); // Open in a new tab
                     }
                 });
 
@@ -162,13 +171,4 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.popup-content').forEach(content => {
         content.style.backgroundColor = dpp_settings.modal_color;
     });
-
-    // Apply button colors
-    const root = document.documentElement;
-    root.style.setProperty('--dpp-link-button-color', dpp_settings.link_button_color);
-    root.style.setProperty('--dpp-link-button-text-color', dpp_settings.link_button_text_color);
-    root.style.setProperty('--dpp-link-button-hover-color', dpp_settings.link_button_hover_color);
-    root.style.setProperty('--dpp-modal-button-color', dpp_settings.modal_button_color);
-    root.style.setProperty('--dpp-modal-button-text-color', dpp_settings.modal_button_text_color);
-    root.style.setProperty('--dpp-modal-button-hover-color', dpp_settings.modal_button_hover_color);
 });
