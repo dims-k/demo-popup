@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.play-button').forEach(button => {
         button.addEventListener('click', function() {
+            console.log('Play button clicked');
+
             var modalDemo = this.closest('.popup-demo');
             if (!modalDemo) {
                 console.error('Element with class .popup-demo not found');
@@ -19,6 +21,98 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             iframe.src = this.getAttribute('data-demo-link');
             modal.style.display = 'flex';
+
+            console.log('Modal opened, checking for overlay settings');
+
+            // Check if overlay is enabled
+            var overlayEnabled = modalDemo.getAttribute('data-overlay-enabled');
+            if (overlayEnabled !== '1') {
+                return;
+            }
+
+            // Get overlay settings
+            var overlayTime = parseInt(modalDemo.getAttribute('data-overlay-time')) || 30;
+            var overlayButtonText = modalDemo.getAttribute('data-overlay-button-text');
+            var overlayButtonColor = modalDemo.getAttribute('data-overlay-button-color');
+            var overlayButtonTextColor = modalDemo.getAttribute('data-overlay-button-text-color');
+            var overlayButtonHoverColor = modalDemo.getAttribute('data-overlay-button-hover-color');
+            var overlayButtonHoverTextColor = modalDemo.getAttribute('data-overlay-button-hover-text-color');
+            var overlayButtonLink = modalDemo.getAttribute('data-overlay-button-link');
+            var overlayContinueButtonText = modalDemo.getAttribute('data-overlay-continue-button-text');
+            var overlayContinueButtonColor = modalDemo.getAttribute('data-overlay-continue-button-color');
+            var overlayContinueButtonTextColor = modalDemo.getAttribute('data-overlay-continue-button-text-color');
+            var overlayContinueButtonHoverColor = modalDemo.getAttribute('data-overlay-continue-button-hover-color');
+            var overlayContinueButtonHoverTextColor = modalDemo.getAttribute('data-overlay-continue-button-hover-text-color');
+
+            console.log('Overlay settings:', {
+                overlayTime,
+                overlayButtonText,
+                overlayButtonColor,
+                overlayButtonTextColor,
+                overlayButtonHoverColor,
+                overlayButtonHoverTextColor,
+                overlayButtonLink,
+                overlayContinueButtonText,
+                overlayContinueButtonColor,
+                overlayContinueButtonTextColor,
+                overlayContinueButtonHoverColor,
+                overlayContinueButtonHoverTextColor
+            });
+
+            // Set a timer to add the overlay after the specified time
+            setTimeout(() => {
+                console.log(`${overlayTime} seconds passed, adding overlay`);
+
+                const overlay = document.createElement('div');
+                overlay.id = 'game-overlay';
+                overlay.style.display = 'flex';
+                overlay.innerHTML = `
+                    <button id="overlay-button" 
+                            style="color: ${overlayButtonTextColor}; background: ${overlayButtonColor};">
+                            ${overlayButtonText}
+                    </button>
+                    <button id="overlay-continue-button" 
+                            style="color: ${overlayContinueButtonTextColor}; background: ${overlayContinueButtonColor};">
+                            ${overlayContinueButtonText}
+                    </button>`;
+                modal.appendChild(overlay);
+
+                const overlayButton = document.getElementById('overlay-button');
+                const overlayContinueButton = document.getElementById('overlay-continue-button');
+
+                overlayButton.addEventListener('click', function() {
+                    overlay.style.display = 'none';
+                    console.log('Overlay button clicked');
+                    if (overlayButtonLink) {
+                        window.location.href = overlayButtonLink;
+                    }
+                });
+
+                overlayButton.addEventListener('mouseover', function() {
+                    overlayButton.style.color = overlayButtonHoverTextColor;
+                    overlayButton.style.background = overlayButtonHoverColor;
+                });
+
+                overlayButton.addEventListener('mouseout', function() {
+                    overlayButton.style.color = overlayButtonTextColor;
+                    overlayButton.style.background = overlayButtonColor;
+                });
+
+                overlayContinueButton.addEventListener('click', function() {
+                    overlay.style.display = 'none';
+                    console.log('Overlay continue button clicked');
+                });
+
+                overlayContinueButton.addEventListener('mouseover', function() {
+                    overlayContinueButton.style.color = overlayContinueButtonHoverTextColor;
+                    overlayContinueButton.style.background = overlayContinueButtonHoverColor;
+                });
+
+                overlayContinueButton.addEventListener('mouseout', function() {
+                    overlayContinueButton.style.color = overlayContinueButtonTextColor;
+                    overlayContinueButton.style.background = overlayContinueButtonColor;
+                });
+            }, overlayTime * 1000); // Convert seconds to milliseconds
         });
     });
 
