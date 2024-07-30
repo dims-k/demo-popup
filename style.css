@@ -73,7 +73,8 @@
     text-align: center;
 }
 
-.link-button, .play-button, #game-overlay button {
+.link-button, .play-button {
+    z-index: 1002;
     font-family: 'Roboto', sans-serif;
     padding: 15px 30px;
     font-size: 25px;
@@ -96,15 +97,46 @@
     background: var(--dpp-link-button-color);
 }
 
-.play-button:hover, #game-overlay button:hover {
-    background: var(--dpp-modal-button-hover-color);
+.play-button:hover {
+    background: var(--dpp-modal-button-hover-color); /* Ensure the hover color is applied */
 }
 
 .link-button:hover {
     background: var(--dpp-link-button-hover-color);
 }
 
-.play-button:active, .link-button:active, #game-overlay button:active {
+.play-button:active, .link-button:active {
+    box-shadow: inset 0 0 10px #000;
+}
+
+/* Overlay button styles */
+#game-overlay .overlay-play-button, #game-overlay .overlay-continue-button {
+    z-index: 1002;
+    font-family: 'Roboto', sans-serif;
+    padding: 15px 30px; /* Make it the same size as the play button */
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--dpp-modal-button-text-color);
+    background: var(--dpp-modal-button-color);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    outline: none;
+    margin: 10px 0;
+}
+
+#game-overlay .overlay-play-button:hover {
+    background: var(--dpp-modal-button-hover-color);
+}
+
+#game-overlay .overlay-continue-button:hover {
+    background: var(--dpp-modal-button-hover-color);
+}
+
+#game-overlay .overlay-play-button:active, #game-overlay .overlay-continue-button:active {
     box-shadow: inset 0 0 10px #000;
 }
 
@@ -131,27 +163,4 @@
     align-items: center;
     flex-direction: column;
     z-index: 1001;
-}
-
-#game-overlay button {
-    font-family: 'Roboto', sans-serif;
-    padding: 15px 30px;
-    font-size: 25px;
-    font-weight: 700;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    outline: none;
-    margin: 10px 0;
-}
-
-#game-overlay button:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-#game-overlay button:active {
-    box-shadow: inset 0 0 10px #000;
 }
