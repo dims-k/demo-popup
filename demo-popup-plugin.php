@@ -3,7 +3,7 @@
 Plugin Name: Demo Popup Plugin
 Plugin URI: https://t.me/dimsseo
 Description: Adds a demo popup with demo game and affiliate link.
-Version: 1.6
+Version: 1.7
 Author: Dims SEO
 Author URI: https://t.me/dimsseo
 */
