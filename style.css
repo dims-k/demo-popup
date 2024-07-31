@@ -60,6 +60,9 @@
 .reload-iframe img, .close-popup img {
     width: 24px;
     height: 24px;
+    object-fit: contain; /* Ensure icons maintain their aspect ratio */
+    max-width: 100%; /* Prevent stretching beyond original size */
+    max-height: 100%; /* Prevent stretching beyond original size */
 }
 /* Popup iframe END */
 
