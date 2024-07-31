@@ -7,15 +7,26 @@ add_action('admin_menu', 'dpp_add_admin_menu');
 
 // Register settings
 function dpp_settings_init() {
-    register_setting('pluginPage', 'dpp_modal_color');
-    register_setting('pluginPage', 'dpp_reload_icon');
-    register_setting('pluginPage', 'dpp_close_icon');
-    register_setting('pluginPage', 'dpp_link_button_color');
-    register_setting('pluginPage', 'dpp_link_button_text_color');
-    register_setting('pluginPage', 'dpp_link_button_hover_color');
-    register_setting('pluginPage', 'dpp_modal_button_color');
-    register_setting('pluginPage', 'dpp_modal_button_text_color');
-    register_setting('pluginPage', 'dpp_modal_button_hover_color');
+    // Define default values
+    $default_settings = array(
+        'dpp_modal_color' => '#333333',
+        'dpp_reload_icon' => plugins_url('img/reload.png', __FILE__),
+        'dpp_close_icon' => plugins_url('img/close.png', __FILE__),
+        'dpp_link_button_color' => '#0155be',
+        'dpp_link_button_text_color' => '#FFFFFF',
+        'dpp_link_button_hover_color' => '#296cbf',
+        'dpp_modal_button_color' => '#d60202',
+        'dpp_modal_button_text_color' => '#FFFFFF',
+        'dpp_modal_button_hover_color' => '#ce2c2c'
+    );
+
+    // Register each setting and set the default value if it's not already set
+    foreach ($default_settings as $setting => $default) {
+        register_setting('pluginPage', $setting);
+        if (get_option($setting) === false) {
+            update_option($setting, $default);
+        }
+    }
 
     add_settings_section(
         'dpp_pluginPage_section',
@@ -100,7 +111,7 @@ add_action('admin_init', 'dpp_settings_init');
 
 // Render settings fields
 function dpp_modal_color_render() {
-    $value = get_option('dpp_modal_color', '#333');
+    $value = get_option('dpp_modal_color', '#333333');
     echo '<input type="text" name="dpp_modal_color" value="' . esc_attr($value) . '" size="7" class="color-field">';
 }
 
@@ -125,7 +136,7 @@ function dpp_close_icon_render() {
 }
 
 function dpp_link_button_color_render() {
-    $value = get_option('dpp_link_button_color', '#f86676');
+    $value = get_option('dpp_link_button_color', '#0155be');
     echo '<input type="text" name="dpp_link_button_color" value="' . esc_attr($value) . '" size="7" class="color-field">';
 }
 
@@ -135,12 +146,12 @@ function dpp_link_button_text_color_render() {
 }
 
 function dpp_link_button_hover_color_render() {
-    $value = get_option('dpp_link_button_hover_color', '#f98995');
+    $value = get_option('dpp_link_button_hover_color', '#296cbf');
     echo '<input type="text" name="dpp_link_button_hover_color" value="' . esc_attr($value) . '" size="7" class="color-field">';
 }
 
 function dpp_modal_button_color_render() {
-    $value = get_option('dpp_modal_button_color', '#6f4eff');
+    $value = get_option('dpp_modal_button_color', '#d60202');
     echo '<input type="text" name="dpp_modal_button_color" value="' . esc_attr($value) . '" size="7" class="color-field">';
 }
 
@@ -150,7 +161,7 @@ function dpp_modal_button_text_color_render() {
 }
 
 function dpp_modal_button_hover_color_render() {
-    $value = get_option('dpp_modal_button_hover_color', '#896ffe');
+    $value = get_option('dpp_modal_button_hover_color', '#ce2c2c');
     echo '<input type="text" name="dpp_modal_button_hover_color" value="' . esc_attr($value) . '" size="7" class="color-field">';
 }
 
