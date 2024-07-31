@@ -47,10 +47,6 @@ Use the shortcode `[demo_popup id="123"]` in your posts, pages, or widgets, wher
 
 You can choose a button style and set custom colors for the buttons from the plugin's settings page in the WordPress admin.
 
-## Changelog
-
-### 1.0
-
 * Initial release.
 
 ## License
