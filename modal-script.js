@@ -68,6 +68,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 overlayContinueButtonHoverTextColor
             });
 
+            // Remove existing overlay if present
+            const existingOverlay = modal.querySelector('#game-overlay');
+            if (existingOverlay) {
+                existingOverlay.remove();
+            }
+
             // Set a timer to add the overlay after the specified time
             setTimeout(() => {
                 console.log(`${overlayTime} seconds passed, adding overlay`);
@@ -164,6 +170,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 iframe.src = '';
             }
             modal.style.display = 'none';
+
+            // Remove overlay when modal is closed
+            const overlay = modal.querySelector('#game-overlay');
+            if (overlay) {
+                overlay.remove();
+            }
         });
     });
 
