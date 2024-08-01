@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             var casinoLink = this.getAttribute('data-casino-link');
             if (casinoLink) {
-                window.location.href = casinoLink;
+                window.open(casinoLink, '_blank');
             }
         });
     });
