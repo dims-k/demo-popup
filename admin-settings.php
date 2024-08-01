@@ -17,7 +17,8 @@ function dpp_settings_init() {
         'dpp_link_button_hover_color' => '#296cbf',
         'dpp_modal_button_color' => '#d60202',
         'dpp_modal_button_text_color' => '#FFFFFF',
-        'dpp_modal_button_hover_color' => '#ce2c2c'
+        'dpp_modal_button_hover_color' => '#ce2c2c',
+        'dpp_yandex_metrika_counter' => '' // Added new setting for Yandex Metrika Counter Number
     );
 
     // Register each setting and set the default value if it's not already set
@@ -106,6 +107,15 @@ function dpp_settings_init() {
         'pluginPage',
         'dpp_pluginPage_section'
     );
+
+    // New field for Yandex Metrika Counter Number
+    add_settings_field(
+        'dpp_yandex_metrika_counter',
+        __('Yandex Metrika Counter Number', 'wordpress'),
+        'dpp_yandex_metrika_counter_render',
+        'pluginPage',
+        'dpp_pluginPage_section'
+    );
 }
 add_action('admin_init', 'dpp_settings_init');
 
@@ -163,6 +173,12 @@ function dpp_modal_button_text_color_render() {
 function dpp_modal_button_hover_color_render() {
     $value = get_option('dpp_modal_button_hover_color', '#ce2c2c');
     echo '<input type="text" name="dpp_modal_button_hover_color" value="' . esc_attr($value) . '" size="7" class="color-field">';
+}
+
+// Render Yandex Metrika Counter Number field
+function dpp_yandex_metrika_counter_render() {
+    $value = get_option('dpp_yandex_metrika_counter', '');
+    echo '<input type="text" name="dpp_yandex_metrika_counter" value="' . esc_attr($value) . '" size="50">';
 }
 
 // Options page
