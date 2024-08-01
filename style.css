@@ -116,7 +116,7 @@
 }
 
 /* Overlay button styles */
-#game-overlay .overlay-play-button, #game-overlay .overlay-continue-button {
+#game-overlay .opb, #game-overlay .ocb {
     z-index: 1002;
     font-family: 'Roboto', sans-serif;
     padding: 10px 15px; /* Make it the same size as the play button */
@@ -137,15 +137,15 @@
     max-width: 250px; /* Maximum width for buttons */
 }
 
-#game-overlay .overlay-play-button:hover {
+#game-overlay .opb:hover {
     background: var(--dpp-modal-button-hover-color);
 }
 
-#game-overlay .overlay-continue-button:hover {
+#game-overlay .ocb:hover {
     background: var(--dpp-modal-button-hover-color);
 }
 
-#game-overlay .overlay-play-button:active, #game-overlay .overlay-continue-button:active {
+#game-overlay .opb:active, #game-overlay .ocb:active {
     box-shadow: inset 0 0 10px #000;
 }
 

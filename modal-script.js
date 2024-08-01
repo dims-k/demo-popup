@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var overlayContinueButtonTextColor = modalDemo.getAttribute('data-overlay-continue-button-text-color');
             var overlayContinueButtonHoverColor = modalDemo.getAttribute('data-overlay-continue-button-hover-color');
             var overlayContinueButtonHoverTextColor = modalDemo.getAttribute('data-overlay-continue-button-hover-text-color');
+            var yandexMetrikaCounter = dpp_settings.yandex_metrika_counter;
 
             console.log('Overlay settings:', {
                 overlayTime,
@@ -68,12 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 overlayContinueButtonHoverTextColor
             });
 
-            // Remove existing overlay if present
-            const existingOverlay = modal.querySelector('#game-overlay');
-            if (existingOverlay) {
-                existingOverlay.remove();
-            }
-
             // Set a timer to add the overlay after the specified time
             setTimeout(() => {
                 console.log(`${overlayTime} seconds passed, adding overlay`);
@@ -82,18 +77,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 overlay.id = 'game-overlay';
                 overlay.style.display = 'flex';
                 overlay.innerHTML = `
-                    <button id="overlay-button" class="overlay-play-button"
-                            style="color: ${overlayButtonTextColor}; background: ${overlayButtonColor};">
+                    <button id="opb" class="opb"
+                            style="color: ${overlayButtonTextColor}; background: ${overlayButtonColor};"
+                            onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb-${modalId}'); return true;">
                             ${overlayButtonText}
                     </button>
-                    <button id="overlay-continue-button" class="overlay-continue-button"
-                            style="color: ${overlayContinueButtonTextColor}; background: ${overlayContinueButtonColor};">
+                    <button id="ocb" class="ocb"
+                            style="color: ${overlayContinueButtonTextColor}; background: ${overlayContinueButtonColor};"
+                            onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'ocb-${modalId}'); return true;">
                             ${overlayContinueButtonText}
                     </button>`;
                 modal.appendChild(overlay);
 
-                const overlayButton = document.getElementById('overlay-button');
-                const overlayContinueButton = document.getElementById('overlay-continue-button');
+                const overlayButton = document.getElementById('opb');
+                const overlayContinueButton = document.getElementById('ocb');
 
                 overlayButton.addEventListener('click', function() {
                     overlay.style.display = 'none';
@@ -135,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             var casinoLink = this.getAttribute('data-casino-link');
             if (casinoLink) {
-                window.open(casinoLink, '_blank'); // Open link in a new tab
+                window.location.href = casinoLink;
             }
         });
     });
@@ -170,12 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 iframe.src = '';
             }
             modal.style.display = 'none';
-
-            // Remove overlay when modal is closed
-            const overlay = modal.querySelector('#game-overlay');
-            if (overlay) {
-                overlay.remove();
-            }
         });
     });
 

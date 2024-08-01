@@ -3,7 +3,7 @@
 Plugin Name: Demo Popup Plugin
 Plugin URI: https://t.me/dimsseo
 Description: Adds a demo popup with demo game and affiliate link.
-Version: 1.7
+Version: 1.8
 Author: Dims SEO
 Author URI: https://t.me/dimsseo
 */
@@ -227,7 +227,8 @@ function dpp_enqueue_scripts() {
         'link_button_hover_color' => get_option('dpp_link_button_hover_color', '#296cbf'),
         'modal_button_color' => get_option('dpp_modal_button_color', '#d60202'),
         'modal_button_text_color' => get_option('dpp_modal_button_text_color', '#FFFFFF'),
-        'modal_button_hover_color' => get_option('dpp_modal_button_hover_color', '#ce2c2c')
+        'modal_button_hover_color' => get_option('dpp_modal_button_hover_color', '#ce2c2c'),
+        'yandex_metrika_counter' => get_option('dpp_yandex_metrika_counter', '')
     );
 
     wp_localize_script('dpp-script', 'dpp_settings', $settings);
@@ -285,6 +286,7 @@ function dpp_modal_shortcode($atts) {
 
     $reload_icon = get_option('dpp_reload_icon') ? get_option('dpp_reload_icon') : plugins_url('img/reload.png', __FILE__);
     $close_icon = get_option('dpp_close_icon') ? get_option('dpp_close_icon') : plugins_url('img/close.png', __FILE__);
+    $yandex_metrika_counter = get_option('dpp_yandex_metrika_counter', '');
 
     ob_start();
     ?>
@@ -304,9 +306,15 @@ function dpp_modal_shortcode($atts) {
          data-overlay-continue-button-hover-text-color="<?php echo esc_attr($overlay_continue_button_hover_text_color); ?>">
         <div class="<?php echo esc_attr($button_style); ?>">
             <?php if ($show_link_button === '1') : ?>
-                <button class="link-button" data-casino-link="<?php echo esc_url($casino_link); ?>"><?php echo esc_html($link_button_text); ?></button>
+                <button class="link-button" data-casino-link="<?php echo esc_url($casino_link); ?>"
+                        onclick="ym(<?php echo esc_js($yandex_metrika_counter); ?>, 'reachGoal', 'link-button-<?php echo esc_js($post_id); ?>'); return true;">
+                        <?php echo esc_html($link_button_text); ?>
+                </button>
             <?php endif; ?>
-            <button class="play-button" data-demo-link="<?php echo esc_url($demo_link); ?>"><?php echo esc_html($play_button_text); ?></button>
+            <button class="play-button" data-demo-link="<?php echo esc_url($demo_link); ?>"
+                    onclick="ym(<?php echo esc_js($yandex_metrika_counter); ?>, 'reachGoal', 'play-button-<?php echo esc_js($post_id); ?>'); return true;">
+                    <?php echo esc_html($play_button_text); ?>
+            </button>
         </div>
     </div>
     <div id="popup-<?php echo esc_attr($post_id); ?>" class="popup" style="display:none;">
