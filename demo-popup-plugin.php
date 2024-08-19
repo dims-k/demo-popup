@@ -38,28 +38,24 @@ function dpp_add_meta_boxes() {
 add_action('add_meta_boxes', 'dpp_add_meta_boxes');
 
 function dpp_modal_meta_callback($post) {
-    // Новые поля для карточек казино
-    // Казино 1
+
     $casino1_logo = get_post_meta($post->ID, '_dpp_casino1_logo', true);
     $casino1_name = get_post_meta($post->ID, '_dpp_casino1_name', 'Casino 1');
     $casino1_bonus = get_post_meta($post->ID, '_dpp_casino1_bonus', '100% ATÉ R$1700');
     $casino1_button_text = get_post_meta($post->ID, '_dpp_casino1_button_text', 'Jogar');
     $casino1_link = get_post_meta($post->ID, '_dpp_casino1_link', true);
 
-    // Казино 2
     $casino2_logo = get_post_meta($post->ID, '_dpp_casino2_logo', true);
     $casino2_name = get_post_meta($post->ID, '_dpp_casino2_name', 'Casino 2');
     $casino2_bonus = get_post_meta($post->ID, '_dpp_casino2_bonus', 'BÔNUS +500% PRIMEIRO DEPÓSITO');
     $casino2_button_text = get_post_meta($post->ID, '_dpp_casino2_button_text', 'Jogar');
     $casino2_link = get_post_meta($post->ID, '_dpp_casino2_link', true);
 
-    // Настройки цветов
     $card_background_color = get_post_meta($post->ID, '_dpp_card_background_color', '#ffffff');
     $button_color = get_post_meta($post->ID, '_dpp_button_color', '#e74c3c');
     $button_hover_color = get_post_meta($post->ID, '_dpp_button_hover_color', '#c0392b');
     $bonus_text_color = get_post_meta($post->ID, '_dpp_bonus_text_color', '#333333');
 
-    // Существующие настройки
     $demo_link = get_post_meta($post->ID, '_dpp_demo_link', true);
     $casino_link = get_post_meta($post->ID, '_dpp_casino_link', true);
     $button_style = get_post_meta($post->ID, '_dpp_button_style', true);
@@ -230,8 +226,7 @@ function dpp_modal_meta_callback($post) {
 
 // Save meta box data
 function dpp_save_meta_box_data($post_id) {
-    // Сохранение новых полей для казино
-    // Казино 1
+
     if (array_key_exists('dpp_casino1_logo', $_POST)) {
         update_post_meta($post_id, '_dpp_casino1_logo', sanitize_text_field($_POST['dpp_casino1_logo']));
     }
@@ -248,7 +243,6 @@ function dpp_save_meta_box_data($post_id) {
         update_post_meta($post_id, '_dpp_casino1_link', esc_url_raw($_POST['dpp_casino1_link']));
     }
 
-    // Казино 2
     if (array_key_exists('dpp_casino2_logo', $_POST)) {
         update_post_meta($post_id, '_dpp_casino2_logo', sanitize_text_field($_POST['dpp_casino2_logo']));
     }
@@ -265,7 +259,6 @@ function dpp_save_meta_box_data($post_id) {
         update_post_meta($post_id, '_dpp_casino2_link', esc_url_raw($_POST['dpp_casino2_link']));
     }
 
-    // Сохранение стилей карточек и кнопок
     if (array_key_exists('dpp_card_background_color', $_POST)) {
         update_post_meta($post_id, '_dpp_card_background_color', sanitize_text_field($_POST['dpp_card_background_color']));
     }
@@ -399,14 +392,12 @@ function dpp_modal_shortcode($atts) {
 
     $post_id = $atts['id'];
     
-    // Казино 1
     $casino1_logo = get_post_meta($post_id, '_dpp_casino1_logo', true);
     $casino1_name = get_post_meta($post_id, '_dpp_casino1_name', 'Casino 1');
     $casino1_bonus = get_post_meta($post_id, '_dpp_casino1_bonus', '100% ATÉ R$1700');
     $casino1_button_text = get_post_meta($post_id, '_dpp_casino1_button_text', 'Jogar');
     $casino1_link = get_post_meta($post_id, '_dpp_casino1_link', true);
 
-    // Казино 2
     $casino2_logo = get_post_meta($post_id, '_dpp_casino2_logo', true);
     $casino2_name = get_post_meta($post_id, '_dpp_casino2_name', 'Casino 2');
     $casino2_bonus = get_post_meta($post_id, '_dpp_casino2_bonus', 'BÔNUS +500% PRIMEIRO DEPÓSITO');
