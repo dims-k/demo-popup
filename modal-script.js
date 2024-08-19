@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 overlay.style.display = 'flex';
                 overlay.innerHTML = `
 <div class="container-p">
-    <a href="${modalDemo.getAttribute('data-casino1-link')}" class="block-link" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb-${modalId}'); return true;">
+    <a href="${modalDemo.getAttribute('data-casino1-link')}" class="block-link" target="_blank" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb-${modalId}'); return true;">
         <div class="block-p" style="background-color: ${modalDemo.getAttribute('data-card-background-color')}">
             <img src="${modalDemo.getAttribute('data-casino1-logo')}" alt="${modalDemo.getAttribute('data-casino1-name')} Logo">
             <div class="title-p">${modalDemo.getAttribute('data-casino1-name')}</div>
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="play-button-p" style="background-color: ${modalDemo.getAttribute('data-button-color')};">${modalDemo.getAttribute('data-casino1-button-text')}</div>
         </div>
     </a>
-    <a href="${modalDemo.getAttribute('data-casino2-link')}" class="block-link" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb2-${modalId}'); return true;">
+    <a href="${modalDemo.getAttribute('data-casino2-link')}" class="block-link" target="_blank" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb2-${modalId}'); return true;">
         <div class="block-p" style="background-color: ${modalDemo.getAttribute('data-card-background-color')}">
             <img src="${modalDemo.getAttribute('data-casino2-logo')}" alt="${modalDemo.getAttribute('data-casino2-name')} Logo">
             <div class="title-p">${modalDemo.getAttribute('data-casino2-name')}</div>
