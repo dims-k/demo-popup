@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
     root.style.setProperty('--dpp-modal-button-text-color', dpp_settings.modal_button_text_color);
     root.style.setProperty('--dpp-modal-button-hover-color', dpp_settings.modal_button_hover_color);
 
+    const yandexMetrikaCounter = dpp_settings.yandex_metrika_counter; // Определяем переменную
+
     document.querySelectorAll('.play-button').forEach(button => {
         button.addEventListener('click', function () {
             const modalDemo = this.closest('.popup-demo');
@@ -42,15 +44,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             function addOverlay() {
                 if (modal.style.display === 'none') {
+                    console.log("Modal closed, not showing overlay.");
                     return; // Не показывать overlay, если модальное окно закрыто
                 }
+
+                console.log("Adding overlay...");
 
                 const overlay = document.createElement('div');
                 overlay.id = 'game-overlay';
                 overlay.style.display = 'flex';
                 overlay.innerHTML = `
 <div class="container-p">
-    <a href="${modalDemo.getAttribute('data-casino1-link')}" class="block-link">
+    <a href="${modalDemo.getAttribute('data-casino1-link')}" class="block-link" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb-${modalId}'); return true;">
         <div class="block-p" style="background-color: ${modalDemo.getAttribute('data-card-background-color')}">
             <img src="${modalDemo.getAttribute('data-casino1-logo')}" alt="${modalDemo.getAttribute('data-casino1-name')} Logo">
             <div class="title-p">${modalDemo.getAttribute('data-casino1-name')}</div>
@@ -58,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="play-button-p" style="background-color: ${modalDemo.getAttribute('data-button-color')};">${modalDemo.getAttribute('data-casino1-button-text')}</div>
         </div>
     </a>
-    <a href="${modalDemo.getAttribute('data-casino2-link')}" class="block-link">
+    <a href="${modalDemo.getAttribute('data-casino2-link')}" class="block-link" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb2-${modalId}'); return true;">
         <div class="block-p" style="background-color: ${modalDemo.getAttribute('data-card-background-color')}">
             <img src="${modalDemo.getAttribute('data-casino2-logo')}" alt="${modalDemo.getAttribute('data-casino2-name')} Logo">
             <div class="title-p">${modalDemo.getAttribute('data-casino2-name')}</div>
@@ -68,7 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
     </a>
 </div>
 <button id="ocb" class="ocb"
-        style="color: ${modalDemo.getAttribute('data-overlay-continue-button-text-color')}; background: ${modalDemo.getAttribute('data-overlay-continue-button-color')};">
+        style="color: ${modalDemo.getAttribute('data-overlay-continue-button-text-color')}; background: ${modalDemo.getAttribute('data-overlay-continue-button-color')};"
+        onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'ocb-${modalId}'); return true;">
         ${modalDemo.getAttribute('data-overlay-continue-button-text')}
 </button>`;
                 modal.appendChild(overlay);
@@ -97,7 +103,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
-            overlayTimeout = setTimeout(addOverlay, overlayTime * 1000);
+            overlayTimeout = setTimeout(() => {
+                console.log(`Showing overlay after ${overlayTime} seconds`);
+                addOverlay();
+            }, overlayTime * 1000);
 
             modal.querySelector('.close-popup').addEventListener('click', function () {
                 clearTimeout(overlayTimeout);
