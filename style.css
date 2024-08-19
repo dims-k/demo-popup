@@ -174,7 +174,7 @@
     align-items: center;
     flex-direction: column;
     z-index: 1001;
-    border-radius: 15px; /* Add border-radius */
+    border-radius: 15px;
 }
 
 /* Overlay styles END */
@@ -189,7 +189,7 @@
 }
 
 .block-link {
-    text-decoration: none !important; /* Убираем подчеркивание ссылок с важностью */
+    text-decoration: none !important;
     color: inherit;
     display: block;
     width: 100%;
@@ -213,9 +213,9 @@
 
 .block-p img {
     object-fit: contain !important;
-    margin-bottom: 10px !important; /* Добавляем отступ в 10px между изображением и названием */
+    margin-bottom: 10px !important;
     align-self: center !important;
-    border-radius: 10px !important; /* Скругляем углы изображения */
+    border-radius: 10px !important;
     max-width: 110px !important;
 }
 
@@ -236,7 +236,7 @@
     color: white;
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 10px; /* Скругляем углы кнопки */
+    border-radius: 10px;
     font-weight: bold;
     margin-top: auto;
     font-size: 22px;
@@ -263,8 +263,8 @@
 
 @media (max-width: 767px) {
     #game-overlay {
-        justify-content: flex-start; /* Выравниваем элементы по верхней части */
-        padding-top: 200px; /* Добавляем отступ сверху для смещения вниз */
+        justify-content: flex-start;
+        padding-top: 200px;
     }
 }
 

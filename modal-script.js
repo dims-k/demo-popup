@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     root.style.setProperty('--dpp-modal-button-text-color', dpp_settings.modal_button_text_color);
     root.style.setProperty('--dpp-modal-button-hover-color', dpp_settings.modal_button_hover_color);
 
-    const yandexMetrikaCounter = dpp_settings.yandex_metrika_counter; // Определяем переменную
+    const yandexMetrikaCounter = dpp_settings.yandex_metrika_counter;
 
     document.querySelectorAll('.play-button').forEach(button => {
         button.addEventListener('click', function () {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
             function addOverlay() {
                 if (modal.style.display === 'none') {
                     console.log("Modal closed, not showing overlay.");
-                    return; // Не показывать overlay, если модальное окно закрыто
+                    return;
                 }
 
                 console.log("Adding overlay...");
@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 overlayContinueButton.addEventListener('click', function () {
                     overlay.style.display = 'none';
 
-                    clearTimeout(overlayTimeout); // Очистить предыдущий таймер
+                    clearTimeout(overlayTimeout);
 
                     overlayTimeout = setTimeout(() => {
                         modal.removeChild(overlay);
-                        addOverlay(); // Показать overlay снова после заданного интервала
+                        addOverlay();
                     }, overlayTime * 1000);
                 });
 

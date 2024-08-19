@@ -279,7 +279,6 @@ function dpp_save_meta_box_data($post_id) {
         update_post_meta($post_id, '_dpp_bonus_text_color', sanitize_text_field($_POST['dpp_bonus_text_color']));
     }
 
-    // Сохранение существующих полей
     if (array_key_exists('dpp_demo_link', $_POST)) {
         update_post_meta($post_id, '_dpp_demo_link', sanitize_text_field($_POST['dpp_demo_link']));
     }
@@ -414,7 +413,6 @@ function dpp_modal_shortcode($atts) {
     $casino2_button_text = get_post_meta($post_id, '_dpp_casino2_button_text', 'Jogar');
     $casino2_link = get_post_meta($post_id, '_dpp_casino2_link', true);
 
-    // Настройки стилей
     $card_background_color = get_post_meta($post_id, '_dpp_card_background_color', '#ffffff');
     $button_color = get_post_meta($post_id, '_dpp_button_color', '#e74c3c');
     $button_hover_color = get_post_meta($post_id, '_dpp_button_hover_color', '#c0392b');
