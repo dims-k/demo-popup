@@ -3,7 +3,7 @@
 Plugin Name: Demo Popup Plugin
 Plugin URI: https://t.me/dimsseo
 Description: Adds a demo popup with demo game and affiliate link.
-Version: 1.8
+Version: 1.9
 Author: Dims SEO
 Author URI: https://t.me/dimsseo
 */
@@ -38,6 +38,28 @@ function dpp_add_meta_boxes() {
 add_action('add_meta_boxes', 'dpp_add_meta_boxes');
 
 function dpp_modal_meta_callback($post) {
+    // Новые поля для карточек казино
+    // Казино 1
+    $casino1_logo = get_post_meta($post->ID, '_dpp_casino1_logo', true);
+    $casino1_name = get_post_meta($post->ID, '_dpp_casino1_name', 'Casino 1');
+    $casino1_bonus = get_post_meta($post->ID, '_dpp_casino1_bonus', '100% ATÉ R$1700');
+    $casino1_button_text = get_post_meta($post->ID, '_dpp_casino1_button_text', 'Jogar');
+    $casino1_link = get_post_meta($post->ID, '_dpp_casino1_link', true);
+
+    // Казино 2
+    $casino2_logo = get_post_meta($post->ID, '_dpp_casino2_logo', true);
+    $casino2_name = get_post_meta($post->ID, '_dpp_casino2_name', 'Casino 2');
+    $casino2_bonus = get_post_meta($post->ID, '_dpp_casino2_bonus', 'BÔNUS +500% PRIMEIRO DEPÓSITO');
+    $casino2_button_text = get_post_meta($post->ID, '_dpp_casino2_button_text', 'Jogar');
+    $casino2_link = get_post_meta($post->ID, '_dpp_casino2_link', true);
+
+    // Настройки цветов
+    $card_background_color = get_post_meta($post->ID, '_dpp_card_background_color', '#ffffff');
+    $button_color = get_post_meta($post->ID, '_dpp_button_color', '#e74c3c');
+    $button_hover_color = get_post_meta($post->ID, '_dpp_button_hover_color', '#c0392b');
+    $bonus_text_color = get_post_meta($post->ID, '_dpp_bonus_text_color', '#333333');
+
+    // Существующие настройки
     $demo_link = get_post_meta($post->ID, '_dpp_demo_link', true);
     $casino_link = get_post_meta($post->ID, '_dpp_casino_link', true);
     $button_style = get_post_meta($post->ID, '_dpp_button_style', true);
@@ -86,6 +108,7 @@ function dpp_modal_meta_callback($post) {
         <input type="checkbox" name="dpp_show_link_button" id="dpp_show_link_button" value="1" <?php checked($show_link_button, '1'); ?>>
         <label for="dpp_show_link_button"><?php _e('Show Link Button', 'dpp'); ?></label>
     </p>
+
     <h4><?php _e('Overlay Button Settings', 'dpp'); ?></h4>
     <p>
         <input type="checkbox" name="dpp_overlay_enabled" id="dpp_overlay_enabled" value="1" <?php checked($overlay_enabled, '1'); ?>>
@@ -140,11 +163,123 @@ function dpp_modal_meta_callback($post) {
         <label for="dpp_overlay_continue_button_hover_text_color"><?php _e('Overlay Continue Button Hover Text Color', 'dpp'); ?></label><br>
         <input type="text" name="dpp_overlay_continue_button_hover_text_color" id="dpp_overlay_continue_button_hover_text_color" value="<?php echo esc_attr($overlay_continue_button_hover_text_color); ?>" size="7" class="color-field">
     </p>
+
+    <h4><?php _e('Casino 1 Settings', 'dpp'); ?></h4>
+    <p>
+        <label for="dpp_casino1_logo"><?php _e('Casino 1 Logo URL', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino1_logo" id="dpp_casino1_logo" value="<?php echo esc_attr($casino1_logo); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino1_name"><?php _e('Casino 1 Name', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino1_name" id="dpp_casino1_name" value="<?php echo esc_attr($casino1_name); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino1_bonus"><?php _e('Casino 1 Bonus Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino1_bonus" id="dpp_casino1_bonus" value="<?php echo esc_attr($casino1_bonus); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino1_button_text"><?php _e('Casino 1 Button Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino1_button_text" id="dpp_casino1_button_text" value="<?php echo esc_attr($casino1_button_text); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino1_link"><?php _e('Casino 1 Affiliate Link', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino1_link" id="dpp_casino1_link" value="<?php echo esc_attr($casino1_link); ?>" size="50">
+    </p>
+
+    <h4><?php _e('Casino 2 Settings', 'dpp'); ?></h4>
+    <p>
+        <label for="dpp_casino2_logo"><?php _e('Casino 2 Logo URL', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino2_logo" id="dpp_casino2_logo" value="<?php echo esc_attr($casino2_logo); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino2_name"><?php _e('Casino 2 Name', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino2_name" id="dpp_casino2_name" value="<?php echo esc_attr($casino2_name); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino2_bonus"><?php _e('Casino 2 Bonus Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino2_bonus" id="dpp_casino2_bonus" value="<?php echo esc_attr($casino2_bonus); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino2_button_text"><?php _e('Casino 2 Button Text', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino2_button_text" id="dpp_casino2_button_text" value="<?php echo esc_attr($casino2_button_text); ?>" size="50">
+    </p>
+    <p>
+        <label for="dpp_casino2_link"><?php _e('Casino 2 Affiliate Link', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_casino2_link" id="dpp_casino2_link" value="<?php echo esc_attr($casino2_link); ?>" size="50">
+    </p>
+
+    <h4><?php _e('Card & Button Styles', 'dpp'); ?></h4>
+    <p>
+        <label for="dpp_card_background_color"><?php _e('Card Background Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_card_background_color" id="dpp_card_background_color" value="<?php echo esc_attr($card_background_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_button_color"><?php _e('Button Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_button_color" id="dpp_button_color" value="<?php echo esc_attr($button_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_button_hover_color"><?php _e('Button Hover Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_button_hover_color" id="dpp_button_hover_color" value="<?php echo esc_attr($button_hover_color); ?>" size="7" class="color-field">
+    </p>
+    <p>
+        <label for="dpp_bonus_text_color"><?php _e('Bonus Text Color', 'dpp'); ?></label><br>
+        <input type="text" name="dpp_bonus_text_color" id="dpp_bonus_text_color" value="<?php echo esc_attr($bonus_text_color); ?>" size="7" class="color-field">
+    </p>
     <?php
 }
 
 // Save meta box data
 function dpp_save_meta_box_data($post_id) {
+    // Сохранение новых полей для казино
+    // Казино 1
+    if (array_key_exists('dpp_casino1_logo', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino1_logo', sanitize_text_field($_POST['dpp_casino1_logo']));
+    }
+    if (array_key_exists('dpp_casino1_name', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino1_name', sanitize_text_field($_POST['dpp_casino1_name']));
+    }
+    if (array_key_exists('dpp_casino1_bonus', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino1_bonus', sanitize_text_field($_POST['dpp_casino1_bonus']));
+    }
+    if (array_key_exists('dpp_casino1_button_text', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino1_button_text', sanitize_text_field($_POST['dpp_casino1_button_text']));
+    }
+    if (array_key_exists('dpp_casino1_link', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino1_link', esc_url_raw($_POST['dpp_casino1_link']));
+    }
+
+    // Казино 2
+    if (array_key_exists('dpp_casino2_logo', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino2_logo', sanitize_text_field($_POST['dpp_casino2_logo']));
+    }
+    if (array_key_exists('dpp_casino2_name', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino2_name', sanitize_text_field($_POST['dpp_casino2_name']));
+    }
+    if (array_key_exists('dpp_casino2_bonus', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino2_bonus', sanitize_text_field($_POST['dpp_casino2_bonus']));
+    }
+    if (array_key_exists('dpp_casino2_button_text', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino2_button_text', sanitize_text_field($_POST['dpp_casino2_button_text']));
+    }
+    if (array_key_exists('dpp_casino2_link', $_POST)) {
+        update_post_meta($post_id, '_dpp_casino2_link', esc_url_raw($_POST['dpp_casino2_link']));
+    }
+
+    // Сохранение стилей карточек и кнопок
+    if (array_key_exists('dpp_card_background_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_card_background_color', sanitize_text_field($_POST['dpp_card_background_color']));
+    }
+    if (array_key_exists('dpp_button_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_button_color', sanitize_text_field($_POST['dpp_button_color']));
+    }
+    if (array_key_exists('dpp_button_hover_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_button_hover_color', sanitize_text_field($_POST['dpp_button_hover_color']));
+    }
+    if (array_key_exists('dpp_bonus_text_color', $_POST)) {
+        update_post_meta($post_id, '_dpp_bonus_text_color', sanitize_text_field($_POST['dpp_bonus_text_color']));
+    }
+
+    // Сохранение существующих полей
     if (array_key_exists('dpp_demo_link', $_POST)) {
         update_post_meta($post_id, '_dpp_demo_link', sanitize_text_field($_POST['dpp_demo_link']));
     }
@@ -264,6 +399,27 @@ function dpp_modal_shortcode($atts) {
     ), $atts, 'demo_popup');
 
     $post_id = $atts['id'];
+    
+    // Казино 1
+    $casino1_logo = get_post_meta($post_id, '_dpp_casino1_logo', true);
+    $casino1_name = get_post_meta($post_id, '_dpp_casino1_name', 'Casino 1');
+    $casino1_bonus = get_post_meta($post_id, '_dpp_casino1_bonus', '100% ATÉ R$1700');
+    $casino1_button_text = get_post_meta($post_id, '_dpp_casino1_button_text', 'Jogar');
+    $casino1_link = get_post_meta($post_id, '_dpp_casino1_link', true);
+
+    // Казино 2
+    $casino2_logo = get_post_meta($post_id, '_dpp_casino2_logo', true);
+    $casino2_name = get_post_meta($post_id, '_dpp_casino2_name', 'Casino 2');
+    $casino2_bonus = get_post_meta($post_id, '_dpp_casino2_bonus', 'BÔNUS +500% PRIMEIRO DEPÓSITO');
+    $casino2_button_text = get_post_meta($post_id, '_dpp_casino2_button_text', 'Jogar');
+    $casino2_link = get_post_meta($post_id, '_dpp_casino2_link', true);
+
+    // Настройки стилей
+    $card_background_color = get_post_meta($post_id, '_dpp_card_background_color', '#ffffff');
+    $button_color = get_post_meta($post_id, '_dpp_button_color', '#e74c3c');
+    $button_hover_color = get_post_meta($post_id, '_dpp_button_hover_color', '#c0392b');
+    $bonus_text_color = get_post_meta($post_id, '_dpp_bonus_text_color', '#333333');
+
     $demo_link = get_post_meta($post_id, '_dpp_demo_link', true);
     $casino_link = get_post_meta($post_id, '_dpp_casino_link', true);
     $button_style = get_post_meta($post_id, '_dpp_button_style', 'style1');
@@ -303,7 +459,21 @@ function dpp_modal_shortcode($atts) {
          data-overlay-continue-button-color="<?php echo esc_attr($overlay_continue_button_color); ?>"
          data-overlay-continue-button-text-color="<?php echo esc_attr($overlay_continue_button_text_color); ?>"
          data-overlay-continue-button-hover-color="<?php echo esc_attr($overlay_continue_button_hover_color); ?>"
-         data-overlay-continue-button-hover-text-color="<?php echo esc_attr($overlay_continue_button_hover_text_color); ?>">
+         data-overlay-continue-button-hover-text-color="<?php echo esc_attr($overlay_continue_button_hover_text_color); ?>"
+         data-casino1-logo="<?php echo esc_attr($casino1_logo); ?>"
+         data-casino1-name="<?php echo esc_attr($casino1_name); ?>"
+         data-casino1-bonus="<?php echo esc_attr($casino1_bonus); ?>"
+         data-casino1-button-text="<?php echo esc_attr($casino1_button_text); ?>"
+         data-casino1-link="<?php echo esc_attr($casino1_link); ?>"
+         data-casino2-logo="<?php echo esc_attr($casino2_logo); ?>"
+         data-casino2-name="<?php echo esc_attr($casino2_name); ?>"
+         data-casino2-bonus="<?php echo esc_attr($casino2_bonus); ?>"
+         data-casino2-button-text="<?php echo esc_attr($casino2_button_text); ?>"
+         data-casino2-link="<?php echo esc_attr($casino2_link); ?>"
+         data-card-background-color="<?php echo esc_attr($card_background_color); ?>"
+         data-button-color="<?php echo esc_attr($button_color); ?>"
+         data-button-hover-color="<?php echo esc_attr($button_hover_color); ?>"
+         data-bonus-text-color="<?php echo esc_attr($bonus_text_color); ?>">
         <div class="<?php echo esc_attr($button_style); ?>">
             <?php if ($show_link_button === '1') : ?>
                 <button class="link-button" data-casino-link="<?php echo esc_url($casino_link); ?>"

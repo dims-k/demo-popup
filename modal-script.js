@@ -83,38 +83,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 overlay.id = 'game-overlay';
                 overlay.style.display = 'flex';
                 overlay.innerHTML = `
-                    <button id="opb" class="opb"
-                            style="color: ${overlayButtonTextColor}; background: ${overlayButtonColor};"
-                            onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb-${modalId}'); return true;">
-                            ${overlayButtonText}
-                    </button>
-                    <button id="ocb" class="ocb"
-                            style="color: ${overlayContinueButtonTextColor}; background: ${overlayContinueButtonColor};"
-                            onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'ocb-${modalId}'); return true;">
-                            ${overlayContinueButtonText}
-                    </button>`;
+<div class="container-p">
+    <a href="${modalDemo.getAttribute('data-casino1-link')}" class="block-link" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'casino1-${modalId}'); return true;">
+        <div class="block-p" style="background-color: ${modalDemo.getAttribute('data-card-background-color')}">
+            <img src="${modalDemo.getAttribute('data-casino1-logo')}" alt="${modalDemo.getAttribute('data-casino1-name')} Logo">
+            <div class="title-p">${modalDemo.getAttribute('data-casino1-name')}</div>
+            <div class="bonus-p" style="color: ${modalDemo.getAttribute('data-bonus-text-color')}">${modalDemo.getAttribute('data-casino1-bonus')}</div>
+            <div class="play-button-p" style="background-color: ${modalDemo.getAttribute('data-button-color')};">${modalDemo.getAttribute('data-casino1-button-text')}</div>
+        </div>
+    </a>
+    <a href="${modalDemo.getAttribute('data-casino2-link')}" class="block-link" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'casino1-${modalId}'); return true;">
+        <div class="block-p" style="background-color: ${modalDemo.getAttribute('data-card-background-color')}">
+            <img src="${modalDemo.getAttribute('data-casino2-logo')}" alt="${modalDemo.getAttribute('data-casino2-name')} Logo">
+            <div class="title-p">${modalDemo.getAttribute('data-casino2-name')}</div>
+            <div class="bonus-p" style="color: ${modalDemo.getAttribute('data-bonus-text-color')}">${modalDemo.getAttribute('data-casino2-bonus')}</div>
+            <div class="play-button-p" style="background-color: ${modalDemo.getAttribute('data-button-color')};">${modalDemo.getAttribute('data-casino2-button-text')}</div>
+        </div>
+    </a>
+</div>
+<button id="ocb" class="ocb"
+        style="color: ${overlayContinueButtonTextColor}; background: ${overlayContinueButtonColor};"
+        onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'ocb-${modalId}'); return true;">
+        ${overlayContinueButtonText}
+</button>`;
                 modal.appendChild(overlay);
 
-                const overlayButton = document.getElementById('opb');
                 const overlayContinueButton = document.getElementById('ocb');
-
-                overlayButton.addEventListener('click', function() {
-                    overlay.style.display = 'none';
-                    console.log('Overlay button clicked');
-                    if (overlayButtonLink) {
-                        window.open(overlayButtonLink, '_blank'); // Open in a new tab
-                    }
-                });
-
-                overlayButton.addEventListener('mouseover', function() {
-                    overlayButton.style.color = overlayButtonHoverTextColor;
-                    overlayButton.style.background = overlayButtonHoverColor;
-                });
-
-                overlayButton.addEventListener('mouseout', function() {
-                    overlayButton.style.color = overlayButtonTextColor;
-                    overlayButton.style.background = overlayButtonColor;
-                });
 
                 overlayContinueButton.addEventListener('click', function() {
                     overlay.style.display = 'none';

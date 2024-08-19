@@ -176,3 +176,96 @@
     z-index: 1001;
     border-radius: 15px; /* Add border-radius */
 }
+
+/* Overlay styles END */
+
+/* Block in popup styles */
+
+.container-p {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.block-link {
+    text-decoration: none !important; /* Убираем подчеркивание ссылок с важностью */
+    color: inherit;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.block-p {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-align: center;
+}
+
+.block-p img {
+    object-fit: contain !important;
+    margin-bottom: 10px !important; /* Добавляем отступ в 10px между изображением и названием */
+    align-self: center !important;
+    border-radius: 10px !important; /* Скругляем углы изображения */
+    max-width: 110px !important;
+}
+
+.title-p {
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.bonus-p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.play-button-p {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px; /* Скругляем углы кнопки */
+    font-weight: bold;
+    margin-top: auto;
+    font-size: 22px;
+}
+
+.play-button-p:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 480px) {
+    .container-p {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .block-link {
+        max-width: calc(50% - 10px);
+    }
+
+    .play-button-p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    #game-overlay {
+        justify-content: flex-start; /* Выравниваем элементы по верхней части */
+        padding-top: 200px; /* Добавляем отступ сверху для смещения вниз */
+    }
+}
+
+/* Block in popup styles END */
