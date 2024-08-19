@@ -268,4 +268,18 @@
     }
 }
 
+@media (max-width: 360px) {
+    #game-overlay {
+        justify-content: flex-start;
+        padding-top: 120px;
+    }
+}
+
+@media (max-width: 320px) {
+    #game-overlay {
+        justify-content: flex-start;
+        padding-top: 5px;
+    }
+}
+
 /* Block in popup styles END */
