@@ -60,13 +60,11 @@
 .reload-iframe img, .close-popup img {
     width: 24px;
     height: 24px;
-    object-fit: contain; /* Ensure icons maintain their aspect ratio */
-    max-width: 100%; /* Prevent stretching beyond original size */
-    max-height: 100%; /* Prevent stretching beyond original size */
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
 }
-/* Popup iframe END */
 
-/* Button styles START */
 .popup-demo {
     position: relative;
     height: auto;
@@ -93,10 +91,10 @@
     outline: none;
     animation: blink-animation 2s infinite;
     display: inline-block;
-    margin: 5px; /* Space between buttons */
-    min-width: 200px; /* Minimum width for buttons */
-    width: 100%; /* Make buttons occupy the same width */
-    max-width: 250px; /* Maximum width for buttons */
+    margin: 5px;
+    min-width: 200px;
+    width: 100%;
+    max-width: 300px;
 }
 
 .link-button {
@@ -115,11 +113,10 @@
     box-shadow: inset 0 0 10px #000;
 }
 
-/* Overlay button styles */
-#game-overlay .opb, #game-overlay .ocb {
+#game-overlay .ocb {
     z-index: 1002;
     font-family: 'Roboto', sans-serif;
-    padding: 10px 15px; /* Make it the same size as the play button */
+    padding: 10px 15px;
     font-size: 22px;
     font-weight: 700;
     color: var(--dpp-modal-button-text-color);
@@ -132,20 +129,16 @@
     text-align: center;
     outline: none;
     margin: 10px 0;
-    min-width: 200px; /* Minimum width for buttons */
-    width: 100%; /* Make buttons occupy the same width */
-    max-width: 250px; /* Maximum width for buttons */
-}
-
-#game-overlay .opb:hover {
-    background: var(--dpp-modal-button-hover-color);
+    min-width: 200px;
+    width: 100%;
+    max-width: 300px;
 }
 
 #game-overlay .ocb:hover {
     background: var(--dpp-modal-button-hover-color);
 }
 
-#game-overlay .opb:active, #game-overlay .ocb:active {
+#game-overlay .ocb:active {
     box-shadow: inset 0 0 10px #000;
 }
 
@@ -157,9 +150,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
 }
-/* Button styles END */
 
-/* Overlay styles */
 #game-overlay {
     position: absolute;
     top: 0;
@@ -177,13 +168,9 @@
     border-radius: 15px;
 }
 
-/* Overlay styles END */
-
-/* Block in popup styles */
-
 .container-p {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 20px;
     flex-wrap: nowrap;
 }
@@ -205,10 +192,12 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 10px;
-    height: 100%;
+    height: auto;
     box-sizing: border-box;
     cursor: pointer;
     text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .block-p img {
@@ -216,7 +205,7 @@
     margin-bottom: 10px !important;
     align-self: center !important;
     border-radius: 10px !important;
-    max-width: 110px !important;
+    max-width: 150px !important;
 }
 
 .title-p {
@@ -226,7 +215,7 @@
 }
 
 .bonus-p {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 20px;
     color: #333;
 }
@@ -251,13 +240,13 @@
         flex-wrap: wrap;
         gap: 10px;
     }
-    
+
     .block-link {
-        max-width: calc(50% - 10px);
+        max-width: 100%;
     }
 
     .play-button-p {
-        font-size: 15px;
+        font-size: 18px;
     }
 }
 

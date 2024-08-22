@@ -3,12 +3,11 @@
 Plugin Name: Demo Popup Plugin
 Plugin URI: https://t.me/dimsseo
 Description: Adds a demo popup with demo game and affiliate link.
-Version: 2.3.3
+Version: 2.3.5
 Author: Dims SEO
 Author URI: https://t.me/dimsseo
 */
 
-// Register custom post type
 function dpp_register_custom_post_type() {
     register_post_type('dpp_modal', array(
         'labels' => array(
@@ -31,7 +30,6 @@ function dpp_register_custom_post_type() {
 }
 add_action('init', 'dpp_register_custom_post_type');
 
-// Add meta boxes
 function dpp_add_meta_boxes() {
     add_meta_box('dpp_modal_meta', __('Popup Settings'), 'dpp_modal_meta_callback', 'dpp_modal', 'normal', 'high');
 }
@@ -44,12 +42,6 @@ function dpp_modal_meta_callback($post) {
     $casino1_bonus = get_post_meta($post->ID, '_dpp_casino1_bonus', '100% ATÉ R$1700');
     $casino1_button_text = get_post_meta($post->ID, '_dpp_casino1_button_text', 'Jogar');
     $casino1_link = get_post_meta($post->ID, '_dpp_casino1_link', true);
-
-    $casino2_logo = get_post_meta($post->ID, '_dpp_casino2_logo', true);
-    $casino2_name = get_post_meta($post->ID, '_dpp_casino2_name', 'Casino 2');
-    $casino2_bonus = get_post_meta($post->ID, '_dpp_casino2_bonus', 'BÔNUS +500% PRIMEIRO DEPÓSITO');
-    $casino2_button_text = get_post_meta($post->ID, '_dpp_casino2_button_text', 'Jogar');
-    $casino2_link = get_post_meta($post->ID, '_dpp_casino2_link', true);
 
     $card_background_color = get_post_meta($post->ID, '_dpp_card_background_color', '#ffffff');
     $button_color = get_post_meta($post->ID, '_dpp_button_color', '#e74c3c');
@@ -89,7 +81,6 @@ function dpp_modal_meta_callback($post) {
         <label for="dpp_button_style"><?php _e('Button Style', 'dpp'); ?></label><br>
         <select name="dpp_button_style" id="dpp_button_style">
             <option value="style1" <?php selected($button_style, 'style1'); ?>>Style 1</option>
-            <!-- Add more styles here in the future -->
         </select>
     </p>
     <p>
@@ -182,28 +173,6 @@ function dpp_modal_meta_callback($post) {
         <input type="text" name="dpp_casino1_link" id="dpp_casino1_link" value="<?php echo esc_attr($casino1_link); ?>" size="50">
     </p>
 
-    <h4><?php _e('Casino 2 Settings', 'dpp'); ?></h4>
-    <p>
-        <label for="dpp_casino2_logo"><?php _e('Casino 2 Logo URL', 'dpp'); ?></label><br>
-        <input type="text" name="dpp_casino2_logo" id="dpp_casino2_logo" value="<?php echo esc_attr($casino2_logo); ?>" size="50">
-    </p>
-    <p>
-        <label for="dpp_casino2_name"><?php _e('Casino 2 Name', 'dpp'); ?></label><br>
-        <input type="text" name="dpp_casino2_name" id="dpp_casino2_name" value="<?php echo esc_attr($casino2_name); ?>" size="50">
-    </p>
-    <p>
-        <label for="dpp_casino2_bonus"><?php _e('Casino 2 Bonus Text', 'dpp'); ?></label><br>
-        <input type="text" name="dpp_casino2_bonus" id="dpp_casino2_bonus" value="<?php echo esc_attr($casino2_bonus); ?>" size="50">
-    </p>
-    <p>
-        <label for="dpp_casino2_button_text"><?php _e('Casino 2 Button Text', 'dpp'); ?></label><br>
-        <input type="text" name="dpp_casino2_button_text" id="dpp_casino2_button_text" value="<?php echo esc_attr($casino2_button_text); ?>" size="50">
-    </p>
-    <p>
-        <label for="dpp_casino2_link"><?php _e('Casino 2 Affiliate Link', 'dpp'); ?></label><br>
-        <input type="text" name="dpp_casino2_link" id="dpp_casino2_link" value="<?php echo esc_attr($casino2_link); ?>" size="50">
-    </p>
-
     <h4><?php _e('Card & Button Styles', 'dpp'); ?></h4>
     <p>
         <label for="dpp_card_background_color"><?php _e('Card Background Color', 'dpp'); ?></label><br>
@@ -224,7 +193,6 @@ function dpp_modal_meta_callback($post) {
     <?php
 }
 
-// Save meta box data
 function dpp_save_meta_box_data($post_id) {
 
     if (array_key_exists('dpp_casino1_logo', $_POST)) {
@@ -241,22 +209,6 @@ function dpp_save_meta_box_data($post_id) {
     }
     if (array_key_exists('dpp_casino1_link', $_POST)) {
         update_post_meta($post_id, '_dpp_casino1_link', esc_url_raw($_POST['dpp_casino1_link']));
-    }
-
-    if (array_key_exists('dpp_casino2_logo', $_POST)) {
-        update_post_meta($post_id, '_dpp_casino2_logo', sanitize_text_field($_POST['dpp_casino2_logo']));
-    }
-    if (array_key_exists('dpp_casino2_name', $_POST)) {
-        update_post_meta($post_id, '_dpp_casino2_name', sanitize_text_field($_POST['dpp_casino2_name']));
-    }
-    if (array_key_exists('dpp_casino2_bonus', $_POST)) {
-        update_post_meta($post_id, '_dpp_casino2_bonus', sanitize_text_field($_POST['dpp_casino2_bonus']));
-    }
-    if (array_key_exists('dpp_casino2_button_text', $_POST)) {
-        update_post_meta($post_id, '_dpp_casino2_button_text', sanitize_text_field($_POST['dpp_casino2_button_text']));
-    }
-    if (array_key_exists('dpp_casino2_link', $_POST)) {
-        update_post_meta($post_id, '_dpp_casino2_link', esc_url_raw($_POST['dpp_casino2_link']));
     }
 
     if (array_key_exists('dpp_card_background_color', $_POST)) {
@@ -336,15 +288,12 @@ function dpp_save_meta_box_data($post_id) {
 }
 add_action('save_post', 'dpp_save_meta_box_data');
 
-// Register settings
 require_once plugin_dir_path(__FILE__) . 'admin-settings.php';
 
-// Enqueue scripts and styles
 function dpp_enqueue_scripts() {
     wp_enqueue_style('dpp-style', plugins_url('style.css', __FILE__));
     wp_enqueue_script('dpp-script', plugins_url('modal-script.js', __FILE__), array('jquery'), null, true);
 
-    // Pass plugin settings to the script
     $settings = array(
         'modal_color' => get_option('dpp_modal_color', '#333'),
         'reload_icon' => get_option('dpp_reload_icon', plugins_url('img/reload.png', __FILE__)),
@@ -362,7 +311,6 @@ function dpp_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'dpp_enqueue_scripts');
 
-// Add shortcode column in admin list
 function dpp_add_shortcode_column($columns) {
     $columns['shortcode'] = __('Shortcode', 'dpp');
     return $columns;
@@ -376,14 +324,12 @@ function dpp_render_shortcode_column($column, $post_id) {
 }
 add_action('manage_dpp_modal_posts_custom_column', 'dpp_render_shortcode_column', 10, 2);
 
-// Make shortcode column sortable
 function dpp_sortable_shortcode_column($columns) {
     $columns['shortcode'] = 'shortcode';
     return $columns;
 }
 add_filter('manage_edit-dpp_modal_sortable_columns', 'dpp_sortable_shortcode_column');
 
-// Shortcode to display popup
 function dpp_modal_shortcode($atts) {
     $atts = shortcode_atts(array(
         'id' => '',
@@ -397,12 +343,6 @@ function dpp_modal_shortcode($atts) {
     $casino1_bonus = get_post_meta($post_id, '_dpp_casino1_bonus', '100% ATÉ R$1700');
     $casino1_button_text = get_post_meta($post_id, '_dpp_casino1_button_text', 'Jogar');
     $casino1_link = get_post_meta($post_id, '_dpp_casino1_link', true);
-
-    $casino2_logo = get_post_meta($post_id, '_dpp_casino2_logo', true);
-    $casino2_name = get_post_meta($post_id, '_dpp_casino2_name', 'Casino 2');
-    $casino2_bonus = get_post_meta($post_id, '_dpp_casino2_bonus', 'BÔNUS +500% PRIMEIRO DEPÓSITO');
-    $casino2_button_text = get_post_meta($post_id, '_dpp_casino2_button_text', 'Jogar');
-    $casino2_link = get_post_meta($post_id, '_dpp_casino2_link', true);
 
     $card_background_color = get_post_meta($post_id, '_dpp_card_background_color', '#ffffff');
     $button_color = get_post_meta($post_id, '_dpp_button_color', '#e74c3c');
@@ -454,11 +394,6 @@ function dpp_modal_shortcode($atts) {
          data-casino1-bonus="<?php echo esc_attr($casino1_bonus); ?>"
          data-casino1-button-text="<?php echo esc_attr($casino1_button_text); ?>"
          data-casino1-link="<?php echo esc_attr($casino1_link); ?>"
-         data-casino2-logo="<?php echo esc_attr($casino2_logo); ?>"
-         data-casino2-name="<?php echo esc_attr($casino2_name); ?>"
-         data-casino2-bonus="<?php echo esc_attr($casino2_bonus); ?>"
-         data-casino2-button-text="<?php echo esc_attr($casino2_button_text); ?>"
-         data-casino2-link="<?php echo esc_attr($casino2_link); ?>"
          data-card-background-color="<?php echo esc_attr($card_background_color); ?>"
          data-button-color="<?php echo esc_attr($button_color); ?>"
          data-button-hover-color="<?php echo esc_attr($button_hover_color); ?>"

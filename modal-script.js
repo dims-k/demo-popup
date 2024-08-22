@@ -63,20 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="play-button-p" style="background-color: ${modalDemo.getAttribute('data-button-color')};">${modalDemo.getAttribute('data-casino1-button-text')}</div>
         </div>
     </a>
-    <a href="${modalDemo.getAttribute('data-casino2-link')}" class="block-link" target="_blank" onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'opb2-${modalId}'); return true;">
-        <div class="block-p" style="background-color: ${modalDemo.getAttribute('data-card-background-color')}">
-            <img src="${modalDemo.getAttribute('data-casino2-logo')}" alt="${modalDemo.getAttribute('data-casino2-name')} Logo">
-            <div class="title-p">${modalDemo.getAttribute('data-casino2-name')}</div>
-            <div class="bonus-p" style="color: ${modalDemo.getAttribute('data-bonus-text-color')}">${modalDemo.getAttribute('data-casino2-bonus')}</div>
-            <div class="play-button-p" style="background-color: ${modalDemo.getAttribute('data-button-color')};">${modalDemo.getAttribute('data-casino2-button-text')}</div>
-        </div>
-    </a>
 </div>
 <button id="ocb" class="ocb"
         style="color: ${modalDemo.getAttribute('data-overlay-continue-button-text-color')}; background: ${modalDemo.getAttribute('data-overlay-continue-button-color')};"
         onclick="ym(${yandexMetrikaCounter}, 'reachGoal', 'ocb-${modalId}'); return true;">
         ${modalDemo.getAttribute('data-overlay-continue-button-text')}
 </button>`;
+
                 modal.appendChild(overlay);
 
                 const overlayContinueButton = document.getElementById('ocb');
