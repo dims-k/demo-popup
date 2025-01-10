@@ -52,7 +52,3 @@ You can choose a button style and set custom colors for the buttons from the plu
 ## License
 
 This plugin is licensed under the GPLv2 or later. For more information, see [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/licenses/gpl-2.0.html).
-
-## Contact
-
-For more information, visit [Dims SEO](https://t.me/dimsseo).
